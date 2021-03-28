@@ -1,0 +1,30 @@
+
+.results, .final-result, .run-button{
+    display: flex;
+     justify-content: center ;
+  }
+  
+  .results div,.run-button{
+      padding: 10px
+  }
+
+  .tests-section{
+      background-color: #c3cecf
+  }
+
+  .test{
+    display: flex;
+    padding:8px
+  }
+
+  .test :first-child {
+    width: 80%;
+  }
+
+  .show{
+      display: block;
+  }
+
+  .hidden{
+    display: none;
+}
