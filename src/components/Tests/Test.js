@@ -19,7 +19,8 @@ const TestCase = (props) => {//testcase
         });
     }
 
-    return <div className="test" onClick={runTestCase}>
+    //onClick={runTestCase}
+    return <div className="test">
         <div>{testCase.description} </div>
         <div> {testCase.status? testCase.status : "Not started"}</div>
         <br />
