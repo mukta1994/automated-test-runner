@@ -1,5 +1,4 @@
-import React, { useState } from 'react';
-
+import React,{ useState } from 'react';
 import '../styles/App.scss';
 import '../styles/tests.scss';
 import TestCases from "./Tests/Tests";
@@ -31,7 +30,7 @@ const [tests,setTests] = useState([
     <div className="App">
       <header className="App-header">
        <h2 className="heading"> Automated Test Runner</h2>
-       <TestCases tests={tests} resetAllTests={()=>setTests(tests)} ></TestCases>
+       <TestCases tests={tests} resetTestCases={(tests)=>setTests(tests)} ></TestCases>
 
       </header>
 

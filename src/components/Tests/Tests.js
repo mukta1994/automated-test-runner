@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import TestCase from "./Test";
 import TestCaseResult from "./Result";
 import Container from 'react-bootstrap/Container';
-import Button from 'react-bootstrap/Button';
+import TestActions from './Action';
 
 
 const TestCases = (props) => {
@@ -13,29 +13,24 @@ const TestCases = (props) => {
     const executedCasesCount = (testCases.filter(item => (item.status === 'Passed' || item.status === 'Failed')).length);
 
     //whenever test runs set the status or update the status depending on test progress
-    const storeStatusInArray = (statusInfo) => {//store status
+    const storeStatusInArray = (statusInfo) => {
         setTestCases(testCases => (addOrUpdateStatusInTestCases(testCases, statusInfo)));
     }
 
-     //add or update status to testCases
-     const addOrUpdateStatusInTestCases = (testCasesArray, statusInfo) => {
-        if (testCasesArray.findIndex(item => item.description === statusInfo.description) === -1)
-            return [...testCasesArray, { description: statusInfo.description, status: statusInfo.testStatus }]
-        else {
-            return testCasesArray.map(item => item.description === statusInfo.description ? { ...item, status: statusInfo.testStatus } : item)
-        }
+    //add or update status to testCases
+    const addOrUpdateStatusInTestCases = (testCasesArray, statusInfo) => {
+        return testCasesArray.map(item => item.description === statusInfo.description ? ({ ...item, status: statusInfo.testStatus }) : item)
     }
 
     //hide or show buttons depending on no. of executed cases count
-    const buttonHideOrShow=()=>{
+    const buttonHideOrShow = () => {
         return executedCasesCount === testCases.length
     }
 
-    //when reset button is triggered reset all statuses to "not started"
-    const resetTestCases = (statusInfo) => {
-        setIsDisabled(false)
-        setRunAllTests("No")
-        return setTestCases(testCasesArray => testCasesArray.map(item => ({ ...item, status: statusInfo })))
+    //all testcases will run on click of this button. To avoid running of testcase on load of component runAllTests variable is set
+    const runAllTestsOnClick = () => {
+        setRunAllTests("All");
+        setIsDisabled(true);
     }
 
     return <Container className="tests-container">
@@ -43,16 +38,13 @@ const TestCases = (props) => {
         <TestCaseResult resultArray={testCases}></TestCaseResult>
 
         {/* Buttons for actions "Run testcases" and "Reset" */}
-        <div className="run-button">
-            <Button disabled={isDisabled} className={`${executedCasesCount === testCases.length ? "hidden" : "show"}`} onClick={() => { setRunAllTests("all"); setIsDisabled(true) }}>Run test cases</Button>
-            <Button className={`${executedCasesCount !== testCases.length ? "hidden" : "show"}`} onClick={() => resetTestCases("Not started")}>Reset</Button>
-        </div>
+        <TestActions buttonVisibility={() => buttonHideOrShow()} runTestsOnClick={() => runAllTestsOnClick()} enableButton={isDisabled}></TestActions>
 
         {/* looping through testcases for every testcase child component is created */}
         <div className="tests-section">
             {testCases.map((test, index) => {
                 return <div key={index}>
-                    <TestCase testCase={test} runAllTests={runAllTests} callStoreStatusInArray={(testDescription, testPassed) => storeStatusInArray(testDescription, testPassed)}></TestCase>
+                    <TestCase testCase={test} runAllTests={runAllTests} callStoreStatusInArray={(testInfo) => storeStatusInArray(testInfo)}></TestCase>
                 </div>
             })
             }

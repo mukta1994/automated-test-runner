@@ -1,17 +1,16 @@
 import React, { useEffect } from 'react';
 
-
-const TestCase = (props) => {//testcase
+const TestCase = (props) => {
 
     const { testCase, runAllTests, callStoreStatusInArray } = props;
 
     useEffect(() => {
-        if (runAllTests === "all")
+        if (runAllTests === "All")
             runTestCase();
     }, [runAllTests]);
 
-    //Run test case
-    const runTestCase = () => {//runTestCase
+    //Run testcase
+    const runTestCase = () => {
         props.callStoreStatusInArray({ description: testCase.description, testStatus: "Running" })
         testCase.run(function (testResult) {
             //called to add or update status to testcase 
@@ -19,9 +18,10 @@ const TestCase = (props) => {//testcase
         });
     }
 
-    return <div className="test" onClick={runTestCase}>
+    //onClick={runTestCase}
+    return <div className="test">
         <div>{testCase.description} </div>
-        <div> {testCase.status? testCase.status : "Not started"}</div>
+        <div> {testCase.status ? testCase.status : "Not started"}</div>
         <br />
     </div>
 }
