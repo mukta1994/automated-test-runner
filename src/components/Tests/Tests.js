@@ -26,6 +26,10 @@ const TestCases = (props) => {
         }
     }
 
+    //hide or show buttons depending on no. of executed cases count
+    const buttonHideOrShow=()=>{
+        return executedCasesCount === testCases.length
+    }
 
     //when reset button is triggered reset all statuses to "not started"
     const resetTestCases = (statusInfo) => {

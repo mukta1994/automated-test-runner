@@ -1,3 +1,5 @@
+import React, { useState } from 'react';
+
 import '../styles/App.scss';
 import '../styles/tests.scss';
 import TestCases from "./Tests/Tests";
@@ -16,7 +18,7 @@ function App() {
 };
 
 
-const tests = ([
+const [tests,setTests] = useState([
     { description: "uploads go in both directions", run: makeDummyTest() },
     { description: "PDFs are adequately waterproof", run: makeDummyTest() },
     { description: "videos are heated to 12,000,000 Kelvin", run: makeDummyTest() },
@@ -29,7 +31,7 @@ const tests = ([
     <div className="App">
       <header className="App-header">
        <h2 className="heading"> Automated Test Runner</h2>
-       <TestCases tests={tests} ></TestCases>
+       <TestCases tests={tests} resetAllTests={()=>setTests(tests)} ></TestCases>
 
       </header>
 

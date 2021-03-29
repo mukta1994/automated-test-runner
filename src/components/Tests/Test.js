@@ -10,7 +10,7 @@ const TestCase = (props) => {//testcase
             runTestCase();
     }, [runAllTests]);
 
-    //Run testcase
+    //Run test case
     const runTestCase = () => {//runTestCase
         props.callStoreStatusInArray({ description: testCase.description, testStatus: "Running" })
         testCase.run(function (testResult) {
