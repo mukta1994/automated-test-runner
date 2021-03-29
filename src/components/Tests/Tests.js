@@ -13,7 +13,7 @@ const TestCases = (props) => {
     const executedCasesCount = (testCases.filter(item => (item.status === 'Passed' || item.status === 'Failed')).length);
 
     //whenever test runs set the status or update the status depending on test progress
-    const storeStatusInArray = (statusInfo) => {//store status
+    const storeStatusInArray = (statusInfo) => {
         setTestCases(testCases => (addOrUpdateStatusInTestCases(testCases, statusInfo)));
     }
 
