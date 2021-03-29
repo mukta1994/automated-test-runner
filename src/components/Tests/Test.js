@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 
 
-const TestCase = (props) => {//testcase
+const TestCase = (props) => {
 
     const { testCase, runAllTests, callStoreStatusInArray } = props;
 
@@ -11,7 +11,7 @@ const TestCase = (props) => {//testcase
     }, [runAllTests]);
 
     //Run testcase
-    const runTestCase = () => {//runTestCase
+    const runTestCase = () => {
         props.callStoreStatusInArray({ description: testCase.description, testStatus: "Running" })
         testCase.run(function (testResult) {
             //called to add or update status to testcase 
